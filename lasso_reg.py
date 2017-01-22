@@ -66,9 +66,8 @@ class lasso_regression:
                 # the following line uses new values for weight[0], weight[1], ..., weight[i-1]
                 # and old values for weight[i], ..., weight[d-1]
 
-weights[i] = lasso_coordinate_descent_step(i, feature_matrix, output, weights, l1_penalty)
-            
-            
+                weights[i] = lasso_coordinate_descent_step(i, feature_matrix, output, weights, l1_penalty)
+
                 # use old_weights_i to compute change in coordinate
                 change_i = abs(weights[i] - old_weights_i)
                 if change_i >= tolerance:
