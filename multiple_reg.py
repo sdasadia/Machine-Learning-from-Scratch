@@ -11,6 +11,12 @@ class multiple_regression:
     print('5. get_rmse(predictions, output)')
     
     def get_numpy_data(self, data, features, output):
+        
+        """
+        Input: data (dataframe), features (list of features), output(output feature)
+        Returns feature matrix, output matrix
+            
+        """
     
         # Add constant column to the data
         data['constant'] = 1
@@ -30,6 +36,10 @@ class multiple_regression:
         return(predictions)
     
     def feature_derivative(self, errors, feature):
+        
+        """
+        Find feature derivatives (applying gradient descent algortihm)
+        """
     
         # derivative =  twice the dot product of error and features matrix
         derivative = 2*np.dot(errors,feature)
@@ -37,6 +47,12 @@ class multiple_regression:
         return(derivative)
 
     def regression_gradient_descent(self, feature_matrix, output, initial_weights, step_size, tolerance):
+        
+        """
+        Fit multiple regression model using gradient descent algorithm
+        Returns weights 
+        
+        """
         converged = False
         weights = np.array(initial_weights) # converts initial_weights to a numpy array
     
@@ -68,6 +84,10 @@ class multiple_regression:
 
 
     def get_rmse(self, predictions, output):
+        
+        """
+        calculate RMSE
+        """
     
         error = predictions - output
         val_err = np.dot(error,error)

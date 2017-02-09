@@ -13,6 +13,12 @@ class lasso_regression:
     print('7. get_rmse(predictions, output)')
     
     def get_numpy_data(self, data, features, output):
+        
+        """
+        Input: data (dataframe), features (list of features), output(output feature)
+        Returns feature matrix, output matrix
+            
+        """
     
         # Add constant column to the data
         data['constant'] = 1
@@ -25,6 +31,11 @@ class lasso_regression:
     
     
     def predict_output(self, feature_matrix, weights):
+        
+        """
+        Input: np array for all predicting features, weights
+        Returns: prediction
+        """
     
         # predictions vector is the dot product of features and weights
         predictions = np.dot(feature_matrix, weights)
@@ -32,12 +43,23 @@ class lasso_regression:
     
     
     def normalize_features(self,feature_matrix):
+        
+        """
+        Function to normalize input features
+        """
         norms = np.linalg.norm(feature_matrix, axis=0)
         normalized_features = feature_matrix / norms
         return(normalized_features, norms)
 
 
     def lasso_coordinate_descent_step(self, i, feature_matrix, output, weights, l1_penalty):
+        
+        """
+            
+        implement lasso cooerdinate descent algorithm
+        Input: i (step), feature_matrix(input np array), output, weights, ly_penalty (values of L1)
+        Returns: New weights for each feature by applying cooerdinate descent algorithm
+        """
         
         # compute prediction
         prediction = predict_output(feature_matrix, weights)
@@ -76,6 +98,10 @@ class lasso_regression:
 
 
     def get_residual_sum_of_squares(self, predictions, output):
+        
+        """
+        compute residual square
+        """
     
         residual = output - predictions
         residual_squared = residual * residual
@@ -83,6 +109,10 @@ class lasso_regression:
         return(RSS)
 
     def get_rmse(self, predictions, output):
+        
+        """
+        Compute RMSE
+        """
     
         error = predictions - output
         val_err = np.dot(error,error)

@@ -12,6 +12,12 @@ class ridge_regression:
     print('6. get_rmse(predictions, output)')
     
     def get_numpy_data(self, data, features, output):
+        
+        """
+        Input: data (dataframe), features (list of features), output(output feature)
+        Returns feature matrix, output matrix
+            
+        """
     
         # Add constant column to the data
         data['constant'] = 1
@@ -31,6 +37,11 @@ class ridge_regression:
     
     
     def feature_derivative_ridge(self,errors, feature, weight, l2_penalty, feature_is_constant):
+        
+        """
+        Find feature derivatives (applying gradient descent algortihm) with L2 Penalty
+        """
+        
         # If feature_is_constant is True, derivative is twice the dot product of errors and feature
         # Otherwise, derivative is twice the dot product plus 2*l2_penalty*weight
     
@@ -42,6 +53,12 @@ class ridge_regression:
             
 
     def ridge_regression_gradient_descent(self, feature_matrix, output, initial_weights, step_size, l2_penalty, max_iterations=100):
+        
+        """
+        implement L2 regularized regression 
+        Returns weights
+        
+        """
     
         weights = np.array(initial_weights)
         iterations = 1
@@ -71,6 +88,10 @@ class ridge_regression:
         return(RSS)
 
     def get_rmse(self, predictions, output):
+        
+        """
+        Calculate RMSE
+        """
     
         error = predictions - output
         val_err = np.dot(error,error)

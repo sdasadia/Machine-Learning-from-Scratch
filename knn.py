@@ -13,6 +13,13 @@ class k_nearest_neighbors:
     print('7. get_rmse(predictions, output)')
     
     def get_numpy_data(self, data, features, output):
+        
+        """
+        Input: data (dataframe), features (list of features), output(output feature)
+        Returns feature matrix, output matrix
+            
+        """
+        
         data['constant'] = 1
         features = ['constant'] + features
         features_array = np.array(data[features])
@@ -21,17 +28,33 @@ class k_nearest_neighbors:
     
     
     def compute_distances(self, feature_matrix, feature_vector):
+        
+        """
+        compute distance
+            
+        """
+        
         diff = feature_matrix[0:] - feature_vector
         distances = np.sqrt(np.sum(diff**2, axis=1))
         return distances
     
     
     def get_k_nearest(self, k, feature_matrix, feature_vector):
+        
+        """
+        get nearest neighbors
+        Returns index of data ordered by increasing distance
+            
+        """
         distances = self.compute_distances(feature_matrix, feature_vector)
         index_array = np.argsort(distances)[0:k]
         return index_array
     
     def predict_for_one(self,k, feature_matrix, output_values, feature_vector):
+        
+        """
+        Predict the best matching data point 
+        """
         index_array = self.get_k_nearest(k, feature_matrix, feature_vector)
         predicted_value = np.mean(output_values[index_array])
         return predicted_value

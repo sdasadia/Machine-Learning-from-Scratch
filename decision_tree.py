@@ -10,15 +10,28 @@ class decision_tree:
     print('5. decision_tree_create(data, features, target, current_depth = 0, max_depth = 10)')
     print('6. count_nodes(tree)')
     print('7. classify(tree, x, annotate = False)')
-    print('8. evaluate_classification_error(self, tree, data)')
+    print('8. evaluate_classification_error(tree, data)')
     
     def get_numpy_data(self, data, features, output):
+        
+        """
+        Input: data (dataframe), features (list of features), output(output feature)
+        Returns feature matrix, output matrix
+            
+        """
     
         features_array = np.array(data[features])
         output_array = np.array(data[output])
         return(features_array, output_array)
     
     def intermediate_node_num_mistakes(self,labels_in_node):
+        
+        """
+        Input: labels_in_node (classifying label (+1 / -1), data_weights (weights for each data point)
+        returns: weight of mistakes
+            
+        """
+        
         # Corner case: If labels_in_node is empty, return 0
         if len(labels_in_node) == 0:
             return 0
@@ -34,6 +47,13 @@ class decision_tree:
     
     
     def best_splitting_feature(self, data, features, target):
+        
+        """
+        Input: data, features (features used to predict target), target, data_weights (weights)
+        Returns: best_feature (which feature to split on -- based on minimum classification error on training data)
+            
+        """
+
     
         best_feature = None # Keep track of the best feature
         best_error = 10     # Keep track of the best error so far
@@ -71,6 +91,11 @@ class decision_tree:
     
     
     def create_leaf(self,target_values):
+        
+        """
+        Function that creates a leaf (a datastructure to represent a tree
+            
+        """
 
         # Create a leaf node
         leaf = {'splitting_feature' : None,
@@ -94,6 +119,13 @@ class decision_tree:
 
 
     def decision_tree_create(self, data, features, target, current_depth = 0, max_depth = 10):
+        
+        """
+        Function to learn decision tree
+        Returns: leaf and nodes for each split
+            
+        """
+        
         remaining_features = features[:] # Make a copy of the features.
     
         target_values = data[target]
@@ -150,11 +182,23 @@ class decision_tree:
                 'right'            : right_tree}
 
     def count_nodes(self, tree):
+        
+        """
+        count no of tree
+        """
+        
         if tree['is_leaf']:
             return 1
         return 1 + count_nodes(tree['left']) + count_nodes(tree['right'])
 
     def classify(self, tree, x, annotate = False):
+        
+        """
+        Function that classifies one data point
+        Input: Tree data structure created in weighted_decision_tree_create
+            
+        """
+        
         # if the node is a leaf node.
         if tree['is_leaf']:
             if annotate:
@@ -171,6 +215,13 @@ class decision_tree:
             return classify(tree['right'], x, annotate)
 
     def evaluate_classification_error(self, tree, data):
+        
+        """
+        calculate classification error 
+        Input: tree
+        Returns error
+        
+        """
         # Apply the classify(tree, x) to each row in your data
         prediction = data.apply(lambda x: classify(tree, x))
         # calculate the classification error and return it

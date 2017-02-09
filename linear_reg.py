@@ -8,6 +8,10 @@ class linear_regression:
     print('3. get_resodual_sum_of_squares(self, input_feature, output, intercept, slope)')
     
     def linear_regression_fit(self,input_feature, output):
+        
+        """
+        implement linear regression and find co-efficients
+        """
 
         a = np.array(input_feature)
         b = np.array(output)
@@ -24,6 +28,11 @@ class linear_regression:
     
     
     def get_regression_predictions(self, input_feature, intercept, slope):
+        
+        """
+        get predictions 
+        Input: input_features and co-efficients
+        """
     
         a = np.array(input_feature)    
         predicted_values = intercept + slope * a
@@ -31,6 +40,10 @@ class linear_regression:
         return predicted_values
     
     def get_residual_sum_of_squares(self, input_feature, output, intercept, slope):
+        
+        """
+        compute residual square
+        """
     
         a = np.array(input_feature)
         b = np.array(output)
